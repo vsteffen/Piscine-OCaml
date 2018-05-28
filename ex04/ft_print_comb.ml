@@ -4,14 +4,14 @@ let ft_print_comb () =
 	let get_ten number = (number mod 100) / 10 in
 	let get_numeral number = number mod 10 in
 	let verif_appear_before hundred ten numeral =
-		if ten < hundred
+		if hundred > ten && hundred > numeral
 			then false
-		else if numeral < ten && numeral < hundred
+		else if ten > numeral || ten < hundred
 			then false
 		else true
 	in
 	let rec loop comb =
-		if comb < 1001 then
+		if comb < 1000 then
 			begin
 				if ((get_hundred comb) <> (get_ten comb) && (get_hundred comb) <> (get_numeral comb) && (get_ten comb) <> (get_numeral comb))
 					&& ( verif_appear_before (get_hundred comb) (get_ten comb) (get_numeral comb) )
