@@ -1,11 +1,13 @@
-let ft_rot_n shift str =
+ let ft_rot_n shift str =
 	let shift_alphabet current =
-		if (int_of_char current ) + shift mod 26 > (int_of_char 'Z') then
-				char_of_int ((int_of_char 'A') + ((shift mod 26) - ((int_of_char current) - (int_of_char 'Z'))))
-		else if (int_of_char current ) <= (int_of_char 'Z') && (int_of_char current ) + shift mod 26 > (int_of_char 'Z') then
-				char_of_int ((int_of_char 'a') + ((shift mod 26) - ((int_of_char current) - (int_of_char 'Z'))))
-		else
+		if current >= 'a' &&  current <= 'z' && ( int_of_char current ) + ( shift mod 26 ) > int_of_char 'z' then
+			char_of_int (int_of_char 'a' - 1 +  (( int_of_char current ) + ( shift mod 26 )) - int_of_char 'z')
+		else if current >= 'A' &&  current <= 'Z' && ( int_of_char current ) + ( shift mod 26 ) > int_of_char 'Z' then
+			char_of_int (int_of_char 'A' - 1 +  (( int_of_char current ) + ( shift mod 26 )) - int_of_char 'Z')
+		else if (current >= 'A' && current <= 'Z') || (current >= 'a' && current <= 'z') then
 			char_of_int ((int_of_char current) + (shift mod 26))
+		else
+			current
 	in
 	String.map shift_alphabet str
 
