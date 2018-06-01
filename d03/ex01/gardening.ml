@@ -91,12 +91,14 @@ let main () =
 		)
 	in
 	let tree2 = Node ("Pouet", Nil, Nil) in
-	let tree3 = Node ("Pouet1", Node ("Pouet2", Nil, Nil), Nil) in
+	let tree3 = Node ("LOL", Node ("MDR", Nil, Nil), Nil) in
 
+	print_endline ( "Size of trees (tree1, tree2, tree3):" );
 	print_int ( size tree1 ); print_char '\n' ;
 	print_int ( size tree2 ); print_char '\n' ;
 	print_int ( size tree3 ); print_char '\n' ;
 	print_char '\n' ;
+	print_endline ( "Height of trees (tree1, tree2, tree3):" );
 	print_int ( height tree1 ); print_char '\n' ;
 	print_int ( height tree2 ); print_char '\n' ;
 	print_int ( height tree3 ); print_char '\n' ;

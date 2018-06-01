@@ -20,7 +20,6 @@ let draw_square_and_string x y size to_print =
 
 let draw_tree_node tree =
 	Graphics.moveto 600 300 ;
-	Graphics.draw_string "" ;
 	match tree with
 	| Nil -> ()
 	| Node (content, left, right)
