@@ -6,7 +6,7 @@ let () =
     if Array.length Sys.argv = 2 then
 	begin
         let get_time_sleep =
-			try int_of_string (Array.get Sys.argv 1) with Failure "The argument given isn't an integer" -> 0
+			try int_of_string (Array.get Sys.argv 1) with Failure (_) -> 0
 		in
         for i = 1 to get_time_sleep do
 			my_sleep ()

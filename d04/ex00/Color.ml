@@ -2,7 +2,7 @@ type t = Spade | Heart | Diamond | Club
 
 let all = [ Spade ; Heart ; Diamond ; Club ]
 
-let toString (card:t) =
+let toString card =
 	if card = Spade then
 		"S"
 	else if card = Heart then
@@ -12,7 +12,7 @@ let toString (card:t) =
 	else
 		"C"
 
-let toStringVerbose (card:t) =
+let toStringVerbose card =
 	if card = Spade then
 		"Spade"
 	else if card = Heart then

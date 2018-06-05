@@ -1,24 +1,37 @@
 let main () =
-	()
-	(* let getQueen = List.nth Value.all 10 in
-	(* let getT2 = List.hd Value.all in *)
-	(* let getAS = List.nth Value.all 12 in *)
+	let basicCard1 = Card.newCard Card.Value.T3 Card.Color.Club in
+	let basicCard2 = Card.newCard Card.Value.Jack Card.Color.Spade in
+	let basicCard3 = Card.newCard Card.Value.As Card.Color.Heart in
+	let basicCard4 = Card.newCard Card.Value.T9 Card.Color.Diamond in
 
-	print_endline ( "Get card int value:" ) ;
-	List.iter (function value -> print_int (Value.toInt value) ; print_char '\n') Value.all ;
+	print_endline ( "Card -> toString / toStringVerbose:" ) ;
+	print_endline ( Card.toString (basicCard1) ) ;
+	print_endline ( Card.toStringVerbose (basicCard1) ) ;
 
-	print_endline ( "\nValue.toString:" ) ;
-	List.iter (function value -> print_endline (Value.toString value)) Value.all ;
+	print_endline ( "\nCard -> allClubs / allSpades / allHearts / allHearts / all:" ) ;
+	List.iter (function card -> print_endline (Card.toStringVerbose card) ;) Card.all ;
+	(* List.iter (function card -> print_endline (Card.toStringVerbose card) ;) Card.allSpades ;
+	List.iter (function card -> print_endline (Card.toStringVerbose card) ;) Card.allHearts ;
+	List.iter (function card -> print_endline (Card.toStringVerbose card) ;) Card.allDiamonds ;
+	List.iter (function card -> print_endline (Card.toStringVerbose card) ;) Card.allClubs ; *)
 
-	print_endline ( "\nValue.toStringVerbose:" ) ;
-	List.iter (function value -> print_endline (Value.toStringVerbose value)) Value.all ;
+	print_endline ( "\nCard -> getValue / getColor:" ) ;
+	print_endline ( Card.Value.toStringVerbose (Card.getValue basicCard1 )) ;
+	print_endline ( Card.Color.toStringVerbose (Card.getColor basicCard1 )) ;
 
-	print_endline ( "\nValue.next:" ) ;
-	print_endline (Value.toStringVerbose (Value.next (getQueen))) ;
-	(* print_endline (Value.toStringVerbose (Value.next (getAS))) ; *)
+	print_endline ( "\nCard -> compare / max / min / best:" ) ;
+	print_int (Card.compare basicCard2 basicCard3 ) ; print_char '\n' ;
+	print_int (Card.compare basicCard3 basicCard2 ) ; print_char '\n' ;
+	print_int (Card.compare basicCard2 basicCard2 ) ; print_char '\n' ;
+	print_endline ( Card.toStringVerbose (Card.max basicCard2 basicCard3) ) ;
+	print_endline ( Card.toStringVerbose (Card.min basicCard2 basicCard3) ) ;
+	print_endline ( Card.toStringVerbose (Card.best [basicCard2 ; basicCard3]) ) ;
+	(* print_endline ( Card.toStringVerbose (Card.best []) ) ; *)
 
-	print_endline ( "\nValue.previous:" ) ;
-	(* print_endline (Value.toStringVerbose (Value.previous (getT2))) *)
-	print_endline (Value.toStringVerbose (Value.previous (getQueen))) *)
+	print_endline ( "\nCard -> isOf / isSpade / isHeart / isDiamond / isClub:" ) ;
+	print_endline ( string_of_bool (Card.isOf basicCard4 Card.Color.Diamond) ) ;
+	print_endline ( string_of_bool (Card.isSpade basicCard4) ) ;
+	print_endline ( string_of_bool (Card.isSpade basicCard2) )
+
 
 let () = main ()

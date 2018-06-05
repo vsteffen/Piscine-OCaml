@@ -47,7 +47,6 @@ struct
 		| Queen -> 11
 		| King -> 12
 		| As -> 13
-	(** Interger representation of a card value, from 1 for T2 to 13 for As *)
 
 	let toString card =
 		match card with
@@ -64,7 +63,6 @@ struct
 		| Queen -> "Q"
 		| King -> "K"
 		| As -> "A"
-	(** returns "2", ..., "10", "J", "Q", "K" or "A" **)
 
 	let toStringVerbose card =
 		match card with
@@ -81,7 +79,6 @@ struct
 		| Queen -> "Queen"
 		| King -> "King"
 		| As -> "As"
-	(** returns "2", ..., "10", "Jack", "Queen", "King" or "As" **)
 
 	let next card =
 	 	match card with
@@ -117,86 +114,78 @@ end
 
 
 
-type t = ( Value.t * Color.t )
+type t = Value.t * Color.t
 
-let newCard value color = ( value * color )
+let newCard value color = ( value , color )
 
 let allSpades =
-	let createSpades value = ( Color.Spade , value ) in
+	let createSpades value = ( value , Color.Spade) in
 	List.map createSpades Value.all
 
 let allHearts =
-	let createHearts value = ( Color.Heart , value ) in
+	let createHearts value = ( value , Color.Heart) in
 	List.map createHearts Value.all
 
 let allDiamonds =
-	let createDiamonds value = ( Color.Diamond , value ) in
+	let createDiamonds value = ( value , Color.Diamond) in
 	List.map createDiamonds Value.all
 
 let allClubs =
-	let createClubs value = ( Color.Club , value ) in
+	let createClubs value = ( value , Color.Club) in
 	List.map createClubs Value.all
 
-let getValue card = Value.t
-let getColor card = Color.t
+let all =
+	allClubs @ allDiamonds @ allHearts @ allSpades
+
+let getValue = fun ( value , _ ) -> value
+let getColor = fun ( _ , color ) -> color
 
 let toString card =
-	let getValue ( value , _ ) = value in
-	let getColor ( _ , value ) = color in
-	Printf.sprintf ( "%s%s" , (getValue card).toString, (getColor card).toString )
+	Printf.sprintf "%s%s" (Value.toString (getValue card)) (Color.toString (getColor card))
 
 let toStringVerbose card =
-	let getValue ( value , _ ) = value in
-	let getColor ( _ , value ) = color in
-	Printf.sprintf ( "%s%s" , (getValue card).toStringVerbose, (getColor card).toStringVerbose )
+	Printf.sprintf "Card(%s, %s)" (Value.toStringVerbose (getValue card))  (Color.toStringVerbose (getColor card))
 
 
-let toCompare card1 card2 =
-	let getValue ( value , _ ) = value in
-	(getValue card1).toInt - (getValue card2).toInt
+let compare card1 card2 =
+	(Value.toInt (getValue card1)) - (Value.toInt (getValue card2))
 
 let max card1 card2 =
-	let getValue ( value , _ ) = value in
-	if (getValue card1).toInt < (getValue card2).toInt then
-		card2
-	else
+	if Value.toInt (getValue card1) >= Value.toInt (getValue card2) then
 		card1
+	else
+		card2
 
 let min card1 card2 =
-	if (getValue card1).toInt > (getValue card2).toInt then
-		card2
-	else
+	if Value.toInt (getValue card1) <= Value.toInt (getValue card2) then
 		card1
+	else
+		card2
 
 let best cards =
 	if cards = [] then
 		invalid_arg ( "Invalid arg: there's no card !" )
 	else
-		let getValue ( value , _ ) = value in
 		let findBest card best =
-			if best < (getValue card).toInt then
-				(getValue card).toInt
+			if Value.toInt (getValue card) < Value.toInt (getValue best) then
+				card
 			else
 				best
 		in
-		List.fold_left findBest cards 0
+		List.fold_left findBest (List.hd cards) cards
 
-let isSpade card color =
-	let getColor ( _ , color ) = color in
-	( (getColor card) = color )
+
+let isOf card color =
+	getColor card = color
 
 let isSpade card =
-	let getColor ( _ , color ) = color in
-	(color = Spade)
+	getColor card = Color.Spade
 
 let isHeart card =
-	let getColor ( _ , color ) = color in
-	(color = Heart)
+	getColor card = Color.Heart
 
 let isDiamond card =
-	let getColor ( _ , color ) = color in
-	(color = Diamond)
+	getColor card = Color.Diamond
 
 let isClub card =
-	let getColor ( _ , color ) = color in
-	(color = Club)
+	getColor card = Color.Club
