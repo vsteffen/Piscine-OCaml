@@ -17,7 +17,7 @@ let main () =
 	(* print_endline (Value.toStringVerbose (Value.next (getAS))) ; *)
 
 	print_endline ( "\nValue.previous:" ) ;
-	(* print_endline (Value.toStringVerbose (Value.previous (getT2))) *)
+	(* print_endline (Value.toStringVerbose (Value.previous (getT2))) ; *)
 	print_endline (Value.toStringVerbose (Value.previous (getQueen)))
 
 let () = main ()

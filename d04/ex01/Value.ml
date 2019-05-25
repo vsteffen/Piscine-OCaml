@@ -65,12 +65,15 @@ let next card =
 	| T9 -> T10
 	| T10 -> Jack
 	| Jack -> Queen
-	| Queen -> As
+	| Queen -> King
+	| King -> As
 	| _ -> invalid_arg "Invalid arg: No card after As"
+(** Returns the next value, or calls invalid_arg if argument is As            *)
 
 let previous card =
  	match card with
-	| As -> Queen
+	| As -> King
+	| King -> Queen
 	| Queen -> Jack
 	| Jack -> T10
 	| T10 -> T9
@@ -82,3 +85,4 @@ let previous card =
 	| T4 -> T3
 	| T3 -> T2
 	| _ -> invalid_arg "Invalid arg: No card before T2"
+(** Returns the previous value, or calls invalid_arg if argument is T2 *)

@@ -92,12 +92,14 @@ struct
 		| T9 -> T10
 		| T10 -> Jack
 		| Jack -> Queen
-		| Queen -> As
+		| Queen -> King
+		| King -> As
 		| _ -> invalid_arg "Invalid arg: No card after As"
 
 	let previous card =
 	 	match card with
-		| As -> Queen
+		| As -> King
+		| King -> Queen
 		| Queen -> Jack
 		| Jack -> T10
 		| T10 -> T9
